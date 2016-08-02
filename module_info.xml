@@ -38,13 +38,13 @@
     
     <widgets>
         
-        <widget for="right_sidebar" id="search" type="php" is_clonable="true" file="search/widget.inc"
+        <widget for="right_sidebar" id="search" type="php" is_clonable="false" file="search/widget.inc"
                 config="search/widget.inc" added_classes="highlighted"/>
         
-        <widget for="right_sidebar" id="searches_cloud" type="php" is_clonable="true" file="searches_cloud/widget.inc"
+        <widget for="right_sidebar" id="searches_cloud" type="php" is_clonable="false" file="searches_cloud/widget.inc"
                 config="searches_cloud/widget.inc"/>
         
-        <widget for="right_sidebar" id="tags_cloud" type="php" is_clonable="true" file="tags_cloud/widget.inc"
+        <widget for="right_sidebar" id="tags_cloud" type="php" is_clonable="false" file="tags_cloud/widget.inc"
                 config="tags_cloud/widget.inc"/>
         
     </widgets>
