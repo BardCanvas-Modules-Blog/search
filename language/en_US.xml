@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+    
+    <display_name>Search for Bardcanvas</display_name>
+    <icon>fa-search</icon>
+    <description>
+        Posts/media search facility
+    </description>
+    
+    <index>
+        <title>Search retults for «{$terms}»</title>
+    </index>
+    
+    <widgets>
+        <search>
+            <title>Search</title>
+            <info>Adds a configurable search form.</info>
+        </search>
+        <searches_cloud>
+            <title>Searches cloud</title>
+            <info>Configurable cloud of popular search terms.</info>
+        </searches_cloud>
+        <tags_cloud>
+            <title>Tags cloud</title>
+            <info>Configurable tags cloud.</info>
+        </tags_cloud>
+    </widgets>
+    
+</language>

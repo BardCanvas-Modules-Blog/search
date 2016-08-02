@@ -1,0 +1,74 @@
+<?php
+namespace hng2_modules\search;
+
+use hng2_base\repository\abstract_repository;
+
+class search_history_repository extends abstract_repository
+{
+    protected $row_class                = "\\hng2_modules\\search\\search_history_record";
+    protected $table_name               = "search_history";
+    protected $key_column_name          = "terms";
+    
+    /**
+     * @param search_history_record $record
+     *
+     * @return int
+     */
+    public function save($record)
+    {
+        global $database;
+        
+        $this->validate_record($record);
+        
+        $record->last_hit = date("Y-m-d H:i:s");
+        
+        $database->exec("
+            insert into search_history (
+              terms, hits, last_hit
+            ) values(
+              '{$record->terms}', '1', '{$record->last_hit}'
+            ) on duplicate key update
+              hits     = hits + 1,
+              last_hit = '{$record->last_hit}'
+        ");
+    }
+    
+    /**
+     * @param search_history_record $record
+     *
+     * @throws \Exception
+     */
+    public function validate_record($record)
+    {
+        if( ! $record instanceof search_history_record )
+            throw new \Exception(
+                "Invalid object class! Expected: {$this->row_class}, received: " . get_class($record)
+            );
+    }
+    
+    public function get_grouped_term_counts($since = "")
+    {
+        global $database;
+        
+        if( empty($since) )
+            $query = "
+                select terms, hits from search_history
+                order by hits desc
+            ";
+        else
+            $query = "
+                select terms, hits from search_history
+                where last_hit >= '{$since}'
+                order by hits desc
+            ";
+        
+        $res = $database->query($query);
+        if( $database->num_rows($res) == 0 ) return array();
+        
+        $return = array();
+        while( $row = $database->fetch_object($res) )
+            $return[$row->terms] = $row->hits;
+        
+        return $return;
+    }
+}
