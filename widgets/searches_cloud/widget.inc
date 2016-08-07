@@ -22,15 +22,15 @@ use hng2_base\module;
 use hng2_base\template;
 use hng2_modules\search\search_history_repository;
 
-global $config, $language;
+global $config, $language, $settings;
 
 $repository = new search_history_repository();
 
 $boundary  = date("Y-m-d H:i:s", strtotime("today - 6 months"));
 $all_terms = array();
 
-foreach( $repository->get_grouped_term_counts($boundary) as $key => $count )
-    $all_terms[$key] += $count;
+foreach( $repository->get_grouped_term_counts($boundary, $settings->get("modules:search.searches_cloud_min_hits"))
+         as $key => $count ) $all_terms[$key] += $count;
 
 if( empty($all_terms) ) return "";
 
@@ -39,9 +39,15 @@ $tag_cloud = build_cloud($all_terms);
 ob_start(); ?>
 
 <div class="tag_cloud">
-    <? foreach($tag_cloud as $tag => $data): ?>
-        <a style="font-size: <?= $data->size ?>px" href="<?= $config->full_root_path ?>/tag/<?= $tag ?>"
-           data-weight="<?= $data->weight ?>"><?= $tag ?></a>
+    <? foreach($tag_cloud as $tag => $data):
+        $title = htmlspecialchars(replace_escaped_vars(
+            $this_module->language->search_hits,
+            '{$hits}',
+            $data->hits
+        ));
+        ?>
+        <a style="font-size: <?= $data->size ?>px" href="<?= $config->full_root_path ?>/?s=<?= urlencode($tag) ?>"
+           data-weight="<?= $data->weight ?>" title="<?= $title ?>"><?= $tag ?></a>
     <? endforeach; ?>
 </div>
 

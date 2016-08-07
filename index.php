@@ -20,17 +20,20 @@ include "../includes/bootstrap.inc";
 
 $config->globals["search_terms"] = trim(stripslashes($_REQUEST["s"]));
 
-$history_repository = new search_history_repository();
-
-$hash       = md5($config->globals["search_terms"]);
-$cookie_key = "{$config->website_key}_s_{$hash}";
-if( empty($_COOKIE[$cookie_key]) )
+if( ! empty($config->globals["search_terms"]) )
 {
-    $history_repository->save(new search_history_record(array(
-        "terms" => $_REQUEST["s"]
-    )));
+    $history_repository = new search_history_repository();
     
-    setcookie($cookie_key, $hash, 0, "/", $config->cookies_domain);
+    $hash       = md5($config->globals["search_terms"]);
+    $cookie_key = "{$config->website_key}_s_{$hash}";
+    if( empty($_COOKIE[$cookie_key]) )
+    {
+        $history_repository->save(new search_history_record(array(
+            "terms" => $_REQUEST["s"]
+        )));
+        
+        setcookie($cookie_key, $hash, 0, "/", $config->cookies_domain);
+    }
 }
 
 $template->set("page_tag", "search_results");

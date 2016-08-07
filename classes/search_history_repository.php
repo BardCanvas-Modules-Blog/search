@@ -46,19 +46,24 @@ class search_history_repository extends abstract_repository
             );
     }
     
-    public function get_grouped_term_counts($since = "")
+    public function get_grouped_term_counts($since = "", $min_hits = 10)
     {
         global $database;
+        
+        $min_hits = empty($min_hits) ? 10 : $min_hits;
+        $having   = $min_hits == 1   ? "" : "having hits >= '$min_hits'";
         
         if( empty($since) )
             $query = "
                 select terms, hits from search_history
+                $having
                 order by hits desc
             ";
         else
             $query = "
                 select terms, hits from search_history
                 where last_hit >= '{$since}'
+                $having
                 order by hits desc
             ";
         
