@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
     
-    <version>0.1 beta</version>
+    <version>0.1 alpha</version>
     <group>System</group>
     <admin_only>true</admin_only>
     
@@ -16,25 +16,25 @@
         <!--<bootstrap></bootstrap>-->
     </php_includes>
     
+    <!--
     <template_includes>
-        <!--<pre_rendering></pre_rendering>-->
-        <!--<html_head></html_head>-->
-        <!--<pre_header></pre_header>-->
-        <!--<header_top></header_top>-->
-        <!--<header_menu></header_menu>-->
-        <!--<header_bottom></header_bottom>-->
-        <!--<pre_content></pre_content>-->
-        <!--<content_top></content_top>-->
-        <!--<home_content></home_content>-->
-        <!--<content_bottom></content_bottom>-->
-        <!--<post_content></post_content>-->
-        <!--<pre_footer></pre_footer>-->
-        <!--<footer_top></footer_top>-->
-        <!--<footer_bottom></footer_bottom>-->
-        <!--<post_footer></post_footer>-->
-        <!--<pre_eof></pre_eof>-->
-        <!--<post_rendering></post_rendering>-->
+        <pre_rendering></pre_rendering>
+        <html_head></html_head>
+        <pre_header></pre_header>
+        <header_top></header_top>
+        <header_menu></header_menu>
+        <header_bottom></header_bottom>
+        <content_top></content_top>
+        <home_content></home_content>
+        <content_bottom></content_bottom>
+        <pre_footer></pre_footer>
+        <footer_top></footer_top>
+        <footer_bottom></footer_bottom>
+        <post_footer></post_footer>
+        <pre_eof></pre_eof>
+        <post_rendering></post_rendering>
     </template_includes>
+    -->
     
     <widgets>
         
