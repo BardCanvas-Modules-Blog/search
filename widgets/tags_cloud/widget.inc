@@ -14,7 +14,7 @@
  * @var \SimpleXMLElement $widget
  * @var string            $seed
  * @var string            $data_key
- * 
+ *
  * @return string
  */
 
@@ -42,18 +42,18 @@ if( empty($all_tags) ) return "";
 $tag_cloud = build_cloud($all_tags);
 
 ob_start(); ?>
-
-<div class="tag_cloud">
-    <? foreach($tag_cloud as $tag => $data):
-        $title = htmlspecialchars(replace_escaped_vars(
-            $this_module->language->tag_hits,
-            '{$hits}',
-            $data->hits
-        ));
-        ?>
-        <a style="font-size: <?= $data->size ?>px" href="<?= $config->full_root_path ?>/tag/<?= $tag ?>"
-           data-weight="<?= $data->weight ?>" title="<?= $title ?>"><?= $tag ?></a>
-    <? endforeach; ?>
-</div>
+    
+    <div class="tag_cloud">
+        <? foreach($tag_cloud as $tag => $data):
+            $title = htmlspecialchars(replace_escaped_vars(
+                $this_module->language->tag_hits,
+                '{$hits}',
+                $data->hits
+            ));
+            ?>
+            <a style="font-size: <?= $data->size ?>px" href="<?= $config->full_root_path ?>/tag/<?= $tag ?>"
+               data-weight="<?= $data->weight ?>" title="<?= $title ?>"><?= $tag ?></a>
+        <? endforeach; ?>
+    </div>
 
 <? return ob_get_clean();

@@ -1,7 +1,7 @@
 <?php
 namespace hng2_modules\search;
 
-use hng2_base\repository\abstract_record;
+use hng2_repository\abstract_record;
 
 class search_history_record extends abstract_record
 {
