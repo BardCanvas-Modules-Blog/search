@@ -34,7 +34,14 @@
             <info>Configurable tags cloud.</info>
         </tags_cloud>
     </widgets>
-
+    
+    <pages>
+        <by_tag>
+            <title>Relevant items tagged with #{$tag}</title>
+            <no_records>No records of any kind have been found with this hashtag.</no_records>
+        </by_tag>
+    </pages>
+    
     <settings_data>
         <title>Search options</title>
         <specs key="tags_cloud_min_hits">
