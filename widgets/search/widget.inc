@@ -4,13 +4,13 @@
  * Called as include() from within a function
  * TODO: Add option to show a category selector, so layout should be readjusted
  *
- * @package    HNG2
+ * @package    BardCanvas
  * @subpackage search
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * Trailing vars:
  * @var module[]          $modules
- * @var module            $this_module    widgets_manager
+ * @var module            $this_module    search
  * @var template          $template       The caller
  * @var \SimpleXMLElement $widget
  * @var string            $seed

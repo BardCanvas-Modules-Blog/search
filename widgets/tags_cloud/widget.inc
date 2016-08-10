@@ -3,13 +3,13 @@
  * Popular tags cloud for right sidebar
  * Called as include() from within a function
  *
- * @package    HNG2
- * @subpackage widgets_manager
+ * @package    BardCanvas
+ * @subpackage search
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * Trailing vars:
  * @var module[]          $modules
- * @var module            $this_module    widgets_manager
+ * @var module            $this_module    search
  * @var template          $template       The caller
  * @var \SimpleXMLElement $widget
  * @var string            $seed
@@ -36,6 +36,11 @@ foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("mo
 
 foreach( $media_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
          as $key => $count ) $all_tags[$key] += $count;
+
+$config->globals["search_tags_cloud:boundary"] =& $boundary;
+$config->globals["search_tags_cloud:all_tags"] =& $all_tags;
+$this_module->load_extensions("tags_cloud_widget", "add_to_tag_counts");
+unset( $config->globals["search_tags_cloud:boundary"], $config->globals["search_tags_cloud:all_tags"] );
 
 if( empty($all_tags) ) return "";
 

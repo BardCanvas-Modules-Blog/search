@@ -3,13 +3,13 @@
  * Popular searches cloud for right sidebar
  * Called as include() from within a function
  *
- * @package    HNG2
- * @subpackage widgets_manager
+ * @package    BardCanvas
+ * @subpackage search
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * Trailing vars:
  * @var module[]          $modules
- * @var module            $this_module    widgets_manager
+ * @var module            $this_module    search
  * @var template          $template       The caller
  * @var \SimpleXMLElement $widget
  * @var string            $seed
