@@ -68,5 +68,15 @@
                 <max>255</max>
             </options>
         </specs>
+        <specs key="searches_cloud_widget_ttl">
+            <title>Popular searches cloud widget cache TTL</title>
+            <description><![CDATA[
+                Amount of hours the searches cloud widget should be cached.<br>
+                Defaults to <code>1</code> hour. Set to <code>0</code> to disable.
+                Recommended value: depends on the search traffic intensity.
+                For high traffic, 1-3 hours should suffice. For less traffic, 6 hours or more.
+            ]]></description>
+            <type>number</type>
+        </specs>
     </settings_data>
 </language>

@@ -22,15 +22,29 @@ use hng2_base\module;
 use hng2_base\template;
 use hng2_modules\search\search_history_repository;
 
-global $config, $language, $settings;
+global $config, $language, $settings, $mem_cache;
 
 $repository = new search_history_repository();
 
-$boundary  = date("Y-m-d H:i:s", strtotime("today - 6 months"));
-$all_terms = array();
+$ttl = $settings->get("modules:search.searches_cloud_widget_ttl"); if( $ttl == "" ) $ttl = 1;
+$ttl = $ttl * 60 * 60;
+$res = null;
 
-foreach( $repository->get_grouped_term_counts($boundary, $settings->get("modules:search.searches_cloud_min_hits"))
-         as $key => $count ) $all_terms[$key] += $count;
+$all_terms = array();
+$cache_key = "search.searches_cloud_widget";
+if($ttl > 0) $res = $mem_cache->get($cache_key);
+
+if( ! is_null($res) )
+{
+    $all_terms = $res;
+}
+else
+{
+    $boundary  = date("Y-m-d H:i:s", strtotime("today - 6 months"));
+    $res = $repository->get_grouped_term_counts($boundary, $settings->get("modules:search.searches_cloud_min_hits"));
+    foreach( $res as $key => $count ) $all_terms[$key] += $count;
+    if($ttl > 0) $mem_cache->set($cache_key, $all_terms, 0, $ttl);
+}
 
 if( empty($all_terms) ) return "";
 
