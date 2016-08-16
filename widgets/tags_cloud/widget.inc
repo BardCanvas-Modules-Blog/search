@@ -23,24 +23,40 @@ use hng2_media\media_repository;
 use hng2_base\template;
 use hng2_modules\posts\posts_repository;
 
-global $config, $language, $settings;
+global $config, $language, $settings, $mem_cache;
 
 $posts_repository = new posts_repository();
 $media_repository = new media_repository();
 
-$boundary = date("Y-m-d H:i:s", strtotime("today - 6 months"));
+$ttl = $settings->get("modules:search.tags_cloud_widget_cache_ttl"); if( $ttl == "" ) $ttl = 3;
+$ttl = $ttl * 60 * 60;
+$res = null;
+
 $all_tags = array();
+$cache_key = "search.tags_cloud_widget_v2";
+if($ttl > 0) $res = $mem_cache->get($cache_key);
 
-foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
-         as $key => $count ) $all_tags[$key] += $count;
-
-foreach( $media_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
-         as $key => $count ) $all_tags[$key] += $count;
-
-$config->globals["search_tags_cloud:boundary"] =& $boundary;
-$config->globals["search_tags_cloud:all_tags"] =& $all_tags;
-$this_module->load_extensions("tags_cloud_widget", "add_to_tag_counts");
-unset( $config->globals["search_tags_cloud:boundary"], $config->globals["search_tags_cloud:all_tags"] );
+if( ! is_null($res) )
+{
+    $all_tags = $res;
+}
+else
+{
+    $boundary = date("Y-m-d H:i:s", strtotime("today - 6 months"));
+    
+    foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
+             as $key => $count ) $all_tags[$key] += $count;
+    
+    foreach( $media_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
+             as $key => $count ) $all_tags[$key] += $count;
+    
+    $config->globals["search_tags_cloud:boundary"] =& $boundary;
+    $config->globals["search_tags_cloud:all_tags"] =& $all_tags;
+    $this_module->load_extensions("tags_cloud_widget", "add_to_tag_counts");
+    unset( $config->globals["search_tags_cloud:boundary"], $config->globals["search_tags_cloud:all_tags"] );
+    
+    if($ttl > 0) $mem_cache->set($cache_key, $all_tags, 0, $ttl);
+}
 
 if( empty($all_tags) ) return "";
 

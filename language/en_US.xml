@@ -72,9 +72,19 @@
             <title>Popular searches cloud widget cache TTL</title>
             <description><![CDATA[
                 Amount of hours the searches cloud widget should be cached.<br>
-                Defaults to <code>1</code> hour. Set to <code>0</code> to disable.
+                Defaults to <code>1</code> hour. Set to <code>0</code> to disable caching.
                 Recommended value: depends on the search traffic intensity.
                 For high traffic, 1-3 hours should suffice. For less traffic, 6 hours or more.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        <specs key="tags_cloud_widget_cache_ttl">
+            <title>Tags cloud widget cache TTL</title>
+            <description><![CDATA[
+                Amount of hours the tags cloud widget should be cached.<br>
+                Defaults to <code>3</code> hours. Set to <code>0</code> to disable caching.
+                Recommended value: depends on the amount of posts being published and their timing.
+                For constantly updated sites, 3-6 hours should suffice. For less updated sites, 24 hours or more.
             ]]></description>
             <type>number</type>
         </specs>
