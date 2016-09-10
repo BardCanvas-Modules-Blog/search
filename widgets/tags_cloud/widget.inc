@@ -33,7 +33,7 @@ $ttl = $ttl * 60 * 60;
 $res = null;
 
 $all_tags = array();
-$cache_key = "search.tags_cloud_widget_v2";
+$cache_key = "search.tags_cloud_widget";
 if($ttl > 0) $res = $mem_cache->get($cache_key);
 
 if( ! is_null($res) )
