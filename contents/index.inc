@@ -19,7 +19,7 @@ use hng2_modules\search\posts_repository_extender;
     <div class="form_wrapper">
         <input type="text" name="s" maxlength="100" 
                placeholder="<?= htmlspecialchars($language->search_placeholder) ?>"
-               value="<?= htmlspecialchars($config->globals["search_terms"]) ?>">
+               value="<?= htmlspecialchars(stripslashes($config->globals["search_terms"])) ?>">
         <span class="submit_icon fa fa-search fa-fw pseudo_link" onclick="$(this).closest('form').submit()"></span>
     </div>
 </form>

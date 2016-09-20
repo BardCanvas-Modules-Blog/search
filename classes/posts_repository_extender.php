@@ -15,7 +15,7 @@ class posts_repository_extender extends posts_repository
     {
         global $config, $account;
         
-        $search = $config->globals["search_terms"];
+        $search = addslashes($config->globals["search_terms"]);
         
         if( empty($search) ) throw new \Exception("Something to search must be specified.");
         
