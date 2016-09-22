@@ -42,7 +42,7 @@ if( ! is_null($res) )
 }
 else
 {
-    $boundary = date("Y-m-d H:i:s", strtotime("today - 6 months"));
+    $boundary = date("Y-m-d H:i:s", strtotime("today - 2 months"));
     
     foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
              as $key => $count ) $all_tags[$key] += $count;
