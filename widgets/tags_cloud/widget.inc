@@ -32,8 +32,11 @@ $ttl = $settings->get("modules:search.tags_cloud_widget_cache_ttl"); if( $ttl ==
 $ttl = $ttl * 60 * 60;
 $res = null;
 
+$version = $settings->get("modules:search.tags_cloud_widget_cache_version");
+if( empty($version) ) $version = 1;
+
 $all_tags = array();
-$cache_key = "search.tags_cloud_widget";
+$cache_key = "search.tags_cloud_widget_v{$version}";
 if($ttl > 0) $res = $mem_cache->get($cache_key);
 
 if( ! is_null($res) )
@@ -42,7 +45,7 @@ if( ! is_null($res) )
 }
 else
 {
-    $boundary = date("Y-m-d H:i:s", strtotime("today - 2 months"));
+    $boundary = date("Y-m-d H:i:s", strtotime("today - 3 months"));
     
     foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
              as $key => $count ) $all_tags[$key] += $count;
@@ -55,7 +58,13 @@ else
     $this_module->load_extensions("tags_cloud_widget", "add_to_tag_counts");
     unset( $config->globals["search_tags_cloud:boundary"], $config->globals["search_tags_cloud:all_tags"] );
     
-    if($ttl > 0) $mem_cache->set($cache_key, $all_tags, 0, $ttl);
+    if($ttl > 0)
+    {
+        $version++;
+        $settings->set("modules:search.tags_cloud_widget_cache_version", $version);
+        $cache_key = "search.tags_cloud_widget_v{$version}";
+        $mem_cache->set($cache_key, $all_tags, 0, $ttl);
+    }
 }
 
 if( empty($all_tags) ) return "";

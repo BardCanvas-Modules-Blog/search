@@ -81,6 +81,14 @@
             ]]></description>
             <type>number</type>
         </specs>
+        <specs key="searches_cloud_widget_cache_version">
+            <title>Versión para el caché de nube de búsquedas populares</title>
+            <description><![CDATA[
+                Automáticamente incrementado en cada actualización.
+                Sumar <code>1</code> para forzar la recarga.
+            ]]></description>
+            <type>number</type>
+        </specs>
         <specs key="tags_cloud_widget_cache_ttl">
             <title>Expiración de caché de nube de etiquetas</title>
             <description><![CDATA[
@@ -90,6 +98,14 @@
                 Valor recomendado: depende de la cantidad de entradas publicadas y su frecuencia.
                 Para sitios constantemente actualizados, 3-6 horas sería suficiente.
                 Para sitios con menor frecuencia de actualización, 24 horas o más.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        <specs key="tags_cloud_widget_cache_version">
+            <title>Versión del caché de nube de etiquetas</title>
+            <description><![CDATA[
+                Automáticamente incrementado en cada actualización.
+                Sumar <code>1</code> para forzar la recarga.
             ]]></description>
             <type>number</type>
         </specs>
