@@ -94,7 +94,6 @@
         <specs key="searches_cloud_widget_cache_version">
             <title>Versión para el caché de nube de búsquedas populares</title>
             <description><![CDATA[
-                Automáticamente incrementado en cada actualización.
                 Sumar <code>1</code> para forzar la recarga.
             ]]></description>
             <type>number</type>
@@ -114,7 +113,6 @@
         <specs key="tags_cloud_widget_cache_version">
             <title>Versión del caché de nube de etiquetas</title>
             <description><![CDATA[
-                Automáticamente incrementado en cada actualización.
                 Sumar <code>1</code> para forzar la recarga.
             ]]></description>
             <type>number</type>

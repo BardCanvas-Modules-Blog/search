@@ -30,11 +30,12 @@ $ttl = $settings->get("modules:search.searches_cloud_widget_ttl"); if( $ttl == "
 $ttl = $ttl * 60 * 60;
 $res = null;
 
-$version = $settings->get("modules:search.searches_cloud_widget_cache_version");
-if( empty($version) ) $version = 1;
+$cache_version = $settings->get("modules:search.searches_cloud_widget_cache_version");
+if( empty($cache_version) ) $cache_version = 1;
+if($_GET["refresh_cache"] == "true") $cache_version++;
 
 $all_terms = array();
-$cache_key = "search.searches_cloud_widget_v{$version}";
+$cache_key = "search.searches_cloud_widget_v{$cache_version}";
 if($ttl > 0) $res = $mem_cache->get($cache_key);
 
 if( ! is_null($res) )
@@ -48,10 +49,8 @@ else
     foreach( $res as $key => $count ) $all_terms[$key] += $count;
     if($ttl > 0)
     {
-        $version++;
-        $settings->set("modules:search.searches_cloud_widget_cache_version", $version);
-        $cache_key = "search.tags_cloud_widget_v{$version}";
         $mem_cache->set($cache_key, $all_terms, 0, $ttl);
+        if($_GET["refresh_cache"] == "true") $settings->set("modules:search.searches_cloud_widget_cache_version", $cache_version);
     }
 }
 
