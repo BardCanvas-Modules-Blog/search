@@ -15,7 +15,10 @@ class posts_repository_extender extends posts_repository
     {
         global $config, $account;
         
-        $search = addslashes($config->globals["search_terms"]);
+        $search  = addslashes($config->globals["search_terms"]);
+        $cat_id  = addslashes($config->globals["category_id"]);
+        $user    = addslashes($config->globals["user_name"]);
+        $pubdate = addslashes($config->globals["pub_date"]);
         
         if( empty($search) ) throw new \Exception("Something to search must be specified.");
         
@@ -72,6 +75,17 @@ class posts_repository_extender extends posts_repository
                 $where[] = "(" . implode("\nOR ", $terms) . ")\n";
             }
         }
+        
+        if( ! empty($cat_id) ) $where[] = "main_category = '$cat_id'";
+        
+        if( ! empty($user) )
+            $where[] = "id_author in (
+                select id_account from account
+                where account.display_name like '%{$user}%'
+                or account.user_name like '%{$user}%'
+            )";
+        
+        if( ! empty($pubdate) ) $where[] = "publishing_date >= '{$pubdate} 00:00:00'";
         
         $find_params = $this->build_find_params($where);
         

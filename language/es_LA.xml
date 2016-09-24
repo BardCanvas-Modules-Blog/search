@@ -9,6 +9,12 @@
     
     <index>
         <title>Resultados de búsqueda para «{$terms}»</title>
+        <placeholder>Palabras, #etiquetas o "frase" a buscar</placeholder>
+        <all_categories>Todas las categorías</all_categories>
+        <any_user>Autor</any_user>
+        <any_date>aaaa-mm-dd</any_date>
+        <submit>Buscar</submit>
+        <reset>Reiniciar</reset>
     </index>
     
     <search_hits>Mostrar resultados ({$hits} resultados)</search_hits>
@@ -16,6 +22,10 @@
     
     <messages>
         <empty_search>Por favor especifica algo qué buscar</empty_search>
+        <invalid_date><![CDATA[
+            Formato de fecha inválido. Si deseas buscar entradas <u>a partir de</u> una fecha específica,
+            usa el formato <code>aaaa-mm-dd</code>, ejemplo: <code>2016-02-14</code> para el 14 de Febrero de 2016.
+        ]]></invalid_date>
         <empty_results>No se ha encontrado nada que coincida con los parámetros de búsqueda especificados</empty_results>
         <results>{$count} resultados</results>
     </messages>
