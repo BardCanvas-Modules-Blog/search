@@ -68,6 +68,16 @@ else
 
 if( empty($all_tags) ) return "";
 
+# Sanitization
+$exceptions = trim($settings->get("modules:search.tags_cloud_exceptions"));
+if( ! empty($exceptions) )
+{
+    $exceptions = preg_split('/\s+/', $exceptions);
+    if( ! empty($exceptions) )
+        foreach($exceptions as $tag)
+            unset($all_tags[$tag]);
+}
+
 $tag_cloud = build_cloud($all_tags);
 
 ob_start(); ?>
