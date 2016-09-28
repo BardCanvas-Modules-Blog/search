@@ -44,7 +44,7 @@ if( ! is_null($res) )
 }
 else
 {
-    $boundary  = date("Y-m-d H:i:s", strtotime("today - 6 months"));
+    $boundary  = date("Y-m-d H:i:s", strtotime("today - 3 months"));
     $res = $repository->get_grouped_term_counts($boundary, $settings->get("modules:search.searches_cloud_min_hits"));
     foreach( $res as $key => $count ) $all_terms[$key] += $count;
     if($ttl > 0)
@@ -56,7 +56,7 @@ else
 
 if( empty($all_terms) ) return "";
 
-$tag_cloud = build_cloud($all_terms);
+$tag_cloud = build_cloud($all_terms, 10, 12, 28);
 
 ob_start(); ?>
 
