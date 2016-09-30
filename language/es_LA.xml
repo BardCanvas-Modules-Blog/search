@@ -17,7 +17,7 @@
         <reset>Reiniciar</reset>
     </index>
     
-    <search_hits>Mostrar resultados ({$hits} resultados)</search_hits>
+    <search_hits>Mostrar resultados ({$hits} búsquedas)</search_hits>
     <tag_hits>Navegar esta etiqueta ({$hits} resultados)</tag_hits>
     
     <messages>
