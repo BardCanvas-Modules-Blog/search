@@ -36,7 +36,7 @@ if( ! empty($config->globals["search_terms"]) )
                 "terms" => $_REQUEST["s"]
             )));
         
-        setcookie($cookie_key, $hash, 0, "/", $config->cookies_domain);
+        setcookie($cookie_key, $hash, time() + (3600 * 3), "/", $config->cookies_domain);
     }
 }
 
