@@ -33,7 +33,7 @@ if( ! empty($config->globals["search_terms"]) )
     {
         if( $account->level < config::MODERATOR_USER_LEVEL )
             $history_repository->save(new search_history_record(array(
-                "terms" => $_REQUEST["s"]
+                "terms" => $config->globals["search_terms"]
             )));
         
         setcookie($cookie_key, $hash, time() + (3600 * 3), "/", $config->cookies_domain);
