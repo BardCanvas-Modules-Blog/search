@@ -44,7 +44,7 @@ if( ! is_null($res) )
 }
 else
 {
-    $boundary  = date("Y-m-d H:i:s", strtotime("today - 3 months"));
+    $boundary  = date("Y-m-d", strtotime("today - 3 months"));
     $res = $repository->get_grouped_term_counts($boundary, $settings->get("modules:search.searches_cloud_min_hits"));
     foreach( $res as $key => $count ) $all_terms[$key] += $count;
     if($ttl > 0)

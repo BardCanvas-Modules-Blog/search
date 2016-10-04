@@ -22,14 +22,13 @@ class search_history_repository extends abstract_repository
         
         $record->last_hit = date("Y-m-d H:i:s");
         
-        $database->exec("
+        return $database->exec("
             insert into search_history (
               terms, hits, last_hit
             ) values(
               '{$record->terms}', '1', '{$record->last_hit}'
             ) on duplicate key update
-              hits     = hits + 1,
-              last_hit = '{$record->last_hit}'
+              hits = hits + 1
         ");
     }
     
@@ -55,14 +54,16 @@ class search_history_repository extends abstract_repository
         
         if( empty($since) )
             $query = "
-                select terms, hits from search_history
+                select terms, sum(hits) as hits from search_history
+                group by terms
                 $having
                 order by hits desc
             ";
         else
             $query = "
-                select terms, hits from search_history
+                select terms, sum(hits) as hits from search_history
                 where last_hit >= '{$since}'
+                group by terms
                 $having
                 order by hits desc
             ";

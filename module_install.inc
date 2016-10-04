@@ -25,9 +25,9 @@ $tables = array(
             
             terms    varchar(100) not null default '',
             hits     bigint unsigned not null default 0,
-            last_hit datetime,
+            last_hit date,
             
-            primary key ( terms )
+            primary key ( terms, last_hit )
             
         ) engine=InnoDB default charset=utf8mb4 collate='utf8mb4_unicode_ci'
     ",
