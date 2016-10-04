@@ -49,20 +49,9 @@
     </pages>
     
     <settings_data>
+        
         <title>Search options</title>
-        <specs key="tags_cloud_min_hits">
-            <title>Minimum hits for tags cloud</title>
-            <description><![CDATA[
-                Amount of published entries to consider as minimum when building the tags cloud.<br>
-                Defaults to <code>10</code>. Recommended minimum: <code>5</code>.
-                Set to <code>1</code> to disable (setting to <code>0</code> will default to <code>10</code>).
-            ]]></description>
-            <type>number</type>
-            <options>
-                <min>1</min>
-                <max>255</max>
-            </options>
-        </specs>
+
         <specs key="searches_cloud_min_hits">
             <title>Minimum hits for popular searches cloud</title>
             <description><![CDATA[
@@ -93,6 +82,20 @@
             ]]></description>
             <type>number</type>
         </specs>
+        
+        <specs key="tags_cloud_min_hits">
+            <title>Minimum hits for tags cloud</title>
+            <description><![CDATA[
+                Amount of published entries to consider as minimum when building the tags cloud.<br>
+                Defaults to <code>10</code>. Recommended minimum: <code>5</code>.
+                Set to <code>1</code> to disable (setting to <code>0</code> will default to <code>10</code>).
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>1</min>
+                <max>255</max>
+            </options>
+        </specs>
         <specs key="tags_cloud_widget_cache_ttl">
             <title>Tags cloud widget cache TTL (expiration)</title>
             <description><![CDATA[
@@ -117,5 +120,7 @@
             ]]></description>
             <type>text</type>
         </specs>
+        
     </settings_data>
+    
 </language>

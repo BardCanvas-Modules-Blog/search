@@ -53,20 +53,9 @@
     </pages>
     
     <settings_data>
+        
         <title>Búsqueda</title>
-        <specs key="tags_cloud_min_hits">
-            <title>Resultados mínimos para nube de etiquetas</title>
-            <description><![CDATA[
-                Cantidad de elementos mínimos a considerar al momento de construir una nube de etiquetas.<br>
-                Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
-                Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
-            ]]></description>
-            <type>number</type>
-            <options>
-                <min>1</min>
-                <max>255</max>
-            </options>
-        </specs>
+        
         <specs key="searches_cloud_min_hits">
             <title>Resultados mínimos para nube de búsquedas populares</title>
             <description><![CDATA[
@@ -98,6 +87,20 @@
             ]]></description>
             <type>number</type>
         </specs>
+        
+        <specs key="tags_cloud_min_hits">
+            <title>Resultados mínimos para nube de etiquetas</title>
+            <description><![CDATA[
+                Cantidad de elementos mínimos a considerar al momento de construir una nube de etiquetas.<br>
+                Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
+                Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>1</min>
+                <max>255</max>
+            </options>
+        </specs>
         <specs key="tags_cloud_widget_cache_ttl">
             <title>Expiración de caché de nube de etiquetas</title>
             <description><![CDATA[
@@ -124,5 +127,6 @@
             ]]></description>
             <type>text</type>
         </specs>
+        
     </settings_data>
 </language>
