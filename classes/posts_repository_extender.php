@@ -45,35 +45,17 @@ class posts_repository_extender extends posts_repository
         }
         else
         {
-            $search_type  = stristr($search, '"') !== false ? "phrase" : "anything";
-            $search       = str_replace('"', "", $search);
-            $search_array = explode(" ", $search);
-            $columns      = array("title", "content");
-            
-            if( $search_type == "phrase" )
-            {
-                $terms = array("
-                    id_author in (
-                        select id_account from account
-                        where account.display_name like '%{$search}%'
-                        or account.user_name like '%{$search}%'
-                    )
-                ");
-                foreach($columns as $col) $terms[] = "($col LIKE '%{$search}%')";
-                $where[] = "(" . implode("\nOR ", $terms) . ")\n";
-            }
-            else
-            {
-                $terms = array("
-                    id_author in (
-                        select id_account from account
-                        where account.display_name like '%{$search}%'
-                        or account.user_name like '%{$search}%'
-                    )
-                ");
-                foreach($columns as $col) $terms[] = "($col LIKE '%" . implode("%' AND $col LIKE '%", $search_array)."%')";
-                $where[] = "(" . implode("\nOR ", $terms) . ")\n";
-            }
+            $where[] = "(
+                title LIKE '%{$search}%'
+                or
+                content LIKE '%{$search}%'
+                or
+                id_author in (
+                    select id_account from account
+                    where account.display_name like '%{$search}%'
+                    or account.user_name like '%{$search}%'
+                )
+            )";
         }
         
         if( ! empty($cat_id) ) $where[] = "main_category = '$cat_id'";
@@ -89,6 +71,8 @@ class posts_repository_extender extends posts_repository
         
         $find_params = $this->build_find_params($where);
         
-        return $this->get_posts_data($find_params, "", "");
+        $return = $this->get_posts_data($find_params, "", "");
+        
+        return $return;
     }
 }

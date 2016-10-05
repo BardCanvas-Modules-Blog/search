@@ -9,7 +9,7 @@
     
     <index>
         <title>Resultados de búsqueda para «{$terms}»</title>
-        <placeholder>Palabras, #etiquetas o "frase" a buscar</placeholder>
+        <placeholder>Palabras o #etiquetas a buscar en alias de autor, título o contenido</placeholder>
         <all_categories>Todas las categorías</all_categories>
         <any_user>Autor</any_user>
         <any_date>aaaa-mm-dd</any_date>

@@ -18,7 +18,7 @@ use hng2_modules\search\search_history_repository;
 include "../config.php";
 include "../includes/bootstrap.inc";
 
-$config->globals["search_terms"] = trim(stripslashes($_REQUEST["s"]));
+$config->globals["search_terms"] = str_replace("\"", "", trim(stripslashes($_REQUEST["s"])));
 $config->globals["category_id"]  = trim(stripslashes($_REQUEST["cat"]));
 $config->globals["user_name"]    = trim(stripslashes($_REQUEST["user"]));
 $config->globals["pub_date"]     = trim(stripslashes($_REQUEST["pubdate"]));

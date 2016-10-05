@@ -9,7 +9,7 @@
     
     <index>
         <title>Search results for «{$terms}»</title>
-        <placeholder>Words, #hashtags or "phrase" to search</placeholder>
+        <placeholder>Words or #hashtags to search in author name, title and content</placeholder>
         <all_categories>All categories</all_categories>
         <any_user>Author</any_user>
         <any_date>yyyy-mm-dd</any_date>

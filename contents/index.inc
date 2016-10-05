@@ -129,7 +129,7 @@ if( $posts_data->count == 0 )
 </h1>
 
 <?
-# echo "<pre>{$repository->get_last_query()}</pre>";
+if($account->_is_admin && $_GET["show_query"] == "true") echo "<pre>{$repository->get_last_query()}</pre>";
 $pagination_url_prefix = "$config->full_root_url/?s=" . urlencode($config->globals["search_terms"]);
 $template->set("pagination_url_prefix", $pagination_url_prefix);
 include "{$template->abspath}/segments/post_index_renderer.inc";
