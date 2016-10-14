@@ -78,6 +78,7 @@ if( ! empty($exceptions) )
             unset($all_tags[$tag]);
 }
 
+ksort($all_tags);
 $tag_cloud = build_cloud($all_tags, 10, 12, 28);
 
 ob_start(); ?>
