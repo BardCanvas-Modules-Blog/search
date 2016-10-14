@@ -57,7 +57,7 @@ class search_history_repository extends abstract_repository
                 select terms, sum(hits) as hits from search_history
                 group by terms
                 $having
-                order by hits desc
+                order by terms asc
             ";
         else
             $query = "
@@ -65,7 +65,7 @@ class search_history_repository extends abstract_repository
                 where last_hit >= '{$since}'
                 group by terms
                 $having
-                order by hits desc
+                order by terms asc
             ";
         
         $res = $database->query($query);
