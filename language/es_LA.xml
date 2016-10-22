@@ -66,7 +66,6 @@
             <type>number</type>
             <options>
                 <min>1</min>
-                <max>255</max>
             </options>
         </specs>
         <specs key="searches_cloud_widget_ttl">
@@ -98,7 +97,6 @@
             <type>number</type>
             <options>
                 <min>1</min>
-                <max>255</max>
             </options>
         </specs>
         <specs key="tags_cloud_widget_cache_ttl">
