@@ -27,16 +27,17 @@ if( ! empty($config->globals["search_terms"]) )
 {
     $history_repository = new search_history_repository();
     
-    $hash       = md5($config->globals["search_terms"]);
+    $terms      = strtolower($config->globals["search_terms"]);
+    $hash       = md5($terms);
     $cookie_key = "{$config->website_key}_s_{$hash}";
     if( empty($_COOKIE[$cookie_key]) )
     {
         if( $account->level < config::MODERATOR_USER_LEVEL )
             $history_repository->save(new search_history_record(array(
-                "terms" => $config->globals["search_terms"]
+                "terms" => $terms
             )));
         
-        setcookie($cookie_key, $hash, time() + (3600 * 3), "/", $config->cookies_domain);
+        setcookie($cookie_key, $hash, strtotime("now + 30 minutes"), "/", $config->cookies_domain);
     }
 }
 
