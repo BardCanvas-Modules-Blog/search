@@ -1,0 +1,11 @@
+
+# Search Module Change Log
+
+## [1.3.5] - 2017-04-20
+
+- Added changelog.
+- Enforced saving search history terms as lowercase to homogenize the tags cloud.
+
+## [1.3.4] - 2017-03-14
+
+- Refacotred group name to support automatic updates.
