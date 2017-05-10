@@ -29,7 +29,7 @@
     <widgets>
         <search>
             <title>Search</title>
-            <info>Adds a configurable search form.</info>
+            <info>Adds a simple search form.</info>
         </search>
         <searches_cloud>
             <title>Searches cloud</title>

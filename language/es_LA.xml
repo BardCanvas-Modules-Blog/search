@@ -33,7 +33,7 @@
     <widgets>
         <search>
             <title>Buscar</title>
-            <info>Añade una forma configurable de búsqueda.</info>
+            <info>Añade una forma simple de búsqueda.</info>
         </search>
         <searches_cloud>
             <title>Búsquedas populares</title>
