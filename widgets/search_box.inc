@@ -2,7 +2,6 @@
 /**
  * Search widget for right sidebar
  * Called as include() from within a function
- * TODO: Add option to show a category selector, so layout should be readjusted
  *
  * @package    BardCanvas
  * @subpackage search
