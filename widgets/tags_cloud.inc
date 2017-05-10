@@ -14,30 +14,39 @@
  * @var \SimpleXMLElement $widget
  * @var string            $seed
  * @var string            $data_key
- *
+ * 
+ * @var toolbox           $toolbox
+ * 
  * @return string
  */
 
 use hng2_base\module;
 use hng2_media\media_repository;
 use hng2_base\template;
+use hng2_modules\widgets_manager\toolbox;
 use hng2_modules\posts\posts_repository;
 
-global $config, $language, $settings, $mem_cache;
+global $config, $language, $mem_cache;
+
+if( empty($config->globals["widgets_manager:toolbox"]) )
+    $config->globals["widgets_manager:toolbox"] = new toolbox();
+$toolbox = $config->globals["widgets_manager:toolbox"];
+$placed_widget = $toolbox->get_widget_from_data_key($data_key);
+if( is_null($placed_widget) ) return "";
+$data = $toolbox->load_widget_data($placed_widget);
 
 $posts_repository = new posts_repository();
 $media_repository = new media_repository();
 
-$ttl = $settings->get("modules:search.tags_cloud_widget_cache_ttl"); if( $ttl == "" ) $ttl = 3;
+$ttl = $data["cache_ttl"]; if( $ttl == "" ) $ttl = 3;
 $ttl = $ttl * 60 * 60;
 $res = null;
 
-$cache_version = $settings->get("modules:search.tags_cloud_widget_cache_version");
-if( empty($cache_version) ) $cache_version = 1;
-if($_GET["refresh_cache"] == "true") $cache_version++;
+if( empty($data["cache_version"]) ) $data["cache_version"] = 1;
+if($_GET["refresh_cache"] == "true") $data["cache_version"]++;
 
 $all_tags = array();
-$cache_key = "search.tags_cloud_widget_v{$cache_version}";
+$cache_key = "search.tags_cloud_widget_v{$data["cache_version"]}";
 if($ttl > 0) $res = $mem_cache->get($cache_key);
 
 if( ! is_null($res) )
@@ -48,10 +57,10 @@ else
 {
     $boundary = date("Y-m-d H:i:s", strtotime("today - 3 months"));
     
-    foreach( $posts_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
+    foreach( $posts_repository->get_grouped_tag_counts($boundary, $data["min_hits"])
              as $key => $count ) $all_tags[$key] += $count;
     
-    foreach( $media_repository->get_grouped_tag_counts($boundary, $settings->get("modules:search.tags_cloud_min_hits"))
+    foreach( $media_repository->get_grouped_tag_counts($boundary, $data["min_hits"])
              as $key => $count ) $all_tags[$key] += $count;
     
     $config->globals["search_tags_cloud:boundary"] =& $boundary;
@@ -62,14 +71,18 @@ else
     if($ttl > 0)
     {
         $mem_cache->set($cache_key, $all_tags, 0, $ttl);
-        if($_GET["refresh_cache"] == "true") $settings->set("modules:search.tags_cloud_widget_cache_version", $cache_version);
+        if($_GET["refresh_cache"] == "true")
+        {
+            $placed_widget->custom_data = $data;
+            $toolbox->save_widget_data($placed_widget);
+        }
     }
 }
 
 if( empty($all_tags) ) return "";
 
 # Sanitization
-$exceptions = trim($settings->get("modules:search.tags_cloud_exceptions"));
+$exceptions = trim($data["exceptions"]);
 if( ! empty($exceptions) )
 {
     $exceptions = preg_split('/\s+/', $exceptions);

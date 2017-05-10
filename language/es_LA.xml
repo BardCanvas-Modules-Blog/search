@@ -38,10 +38,82 @@
         <searches_cloud>
             <title>Búsquedas populares</title>
             <info>Nube de resultados de búsqueda populares.</info>
+            <editable_specs>
+                <specs key="min_hits">
+                    <title>Resultados mínimos para nube de búsquedas populares</title>
+                    <description><![CDATA[
+                        Cantidad de elementos mínimos a considerar al momento de construir una nube de resultados de búsqueda más populares.<br>
+                        Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
+                        Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
+                    ]]></description>
+                    <type>number</type>
+                    <options>
+                        <min>1</min>
+                    </options>
+                </specs>
+                <specs key="cache_ttl">
+                    <title>Expiración de caché de búsquedas populares</title>
+                    <description><![CDATA[
+                        Cantidad de horas que la nube debe permanecer fija.<br>
+                        Por defecto, este caché tiene un tiempo de vida de <code>1</code> hora.
+                        Poner <code>0</code> para deshabilitar el cacheo.
+                        Valor recomendado: depende de la intensidad de búsquedas en el sitio.
+                        Para tráfico pesado, 1-3 horas sería suficiente. Para menor tráfico, 6 horas o más.
+                    ]]></description>
+                    <type>number</type>
+                </specs>
+                <specs key="cache_version">
+                    <title>Versión para el caché de nube de búsquedas populares</title>
+                    <description><![CDATA[
+                        Sumar <code>1</code> para forzar la recarga.
+                    ]]></description>
+                    <type>number</type>
+                </specs>
+            </editable_specs>
         </searches_cloud>
         <tags_cloud>
             <title>Nube de etiquetas</title>
             <info>Nube de etiquetas configurable.</info>
+            <editable_specs>
+                <specs key="min_hits">
+                    <title>Resultados mínimos para nube de etiquetas</title>
+                    <description><![CDATA[
+                        Cantidad de elementos mínimos a considerar al momento de construir una nube de etiquetas.<br>
+                        Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
+                        Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
+                    ]]></description>
+                    <type>number</type>
+                    <options>
+                        <min>1</min>
+                    </options>
+                </specs>
+                <specs key="cache_ttl">
+                    <title>Expiración de caché de nube de etiquetas</title>
+                    <description><![CDATA[
+                        Cantidad de horas que la nube debe permanecer fija.<br>
+                        Por defecto, este caché tiene un tiempo de vida de <code>3</code> horas.
+                        Poner <code>0</code> para deshabilitar el cacheo.
+                        Valor recomendado: depende de la cantidad de entradas publicadas y su frecuencia.
+                        Para sitios constantemente actualizados, 3-6 horas sería suficiente.
+                        Para sitios con menor frecuencia de actualización, 24 horas o más.
+                    ]]></description>
+                    <type>number</type>
+                </specs>
+                <specs key="cache_version">
+                    <title>Versión del caché de nube de etiquetas</title>
+                    <description><![CDATA[
+                        Sumar <code>1</code> para forzar la recarga.
+                    ]]></description>
+                    <type>number</type>
+                </specs>
+                <specs key="exceptions">
+                    <title>Excepciones para la nube de etiquetas</title>
+                    <description><![CDATA[
+                        Lista separada por espacios de tags (sin el símbolo <code>#</code>) a excluír en la nube de etiquetas.
+                    ]]></description>
+                    <type>textarea</type>
+                </specs>
+            </editable_specs>
         </tags_cloud>
     </widgets>
     
@@ -52,79 +124,4 @@
         </by_tag>
     </pages>
     
-    <settings_data>
-        
-        <title>Búsqueda</title>
-        
-        <specs key="searches_cloud_min_hits">
-            <title>Resultados mínimos para nube de búsquedas populares</title>
-            <description><![CDATA[
-                Cantidad de elementos mínimos a considerar al momento de construir una nube de resultados de búsqueda más populares.<br>
-                Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
-                Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
-            ]]></description>
-            <type>number</type>
-            <options>
-                <min>1</min>
-            </options>
-        </specs>
-        <specs key="searches_cloud_widget_ttl">
-            <title>Expiración de caché de búsquedas populares</title>
-            <description><![CDATA[
-                Cantidad de horas que la nube debe permanecer fija.<br>
-                Por defecto, este caché tiene un tiempo de vida de <code>1</code> hora.
-                Poner <code>0</code> para deshabilitar el cacheo.
-                Valor recomendado: depende de la intensidad de búsquedas en el sitio.
-                Para tráfico pesado, 1-3 horas sería suficiente. Para menor tráfico, 6 horas o más.
-            ]]></description>
-            <type>number</type>
-        </specs>
-        <specs key="searches_cloud_widget_cache_version">
-            <title>Versión para el caché de nube de búsquedas populares</title>
-            <description><![CDATA[
-                Sumar <code>1</code> para forzar la recarga.
-            ]]></description>
-            <type>number</type>
-        </specs>
-        
-        <specs key="tags_cloud_min_hits">
-            <title>Resultados mínimos para nube de etiquetas</title>
-            <description><![CDATA[
-                Cantidad de elementos mínimos a considerar al momento de construir una nube de etiquetas.<br>
-                Valor por defecto: <code>10</code>. Mínimo recomendado: <code>5</code>.
-                Poner <code>1</code> para deshabilitar (Si se usa <code>0</code> se caerá por defecto en <code>10</code>).
-            ]]></description>
-            <type>number</type>
-            <options>
-                <min>1</min>
-            </options>
-        </specs>
-        <specs key="tags_cloud_widget_cache_ttl">
-            <title>Expiración de caché de nube de etiquetas</title>
-            <description><![CDATA[
-                Cantidad de horas que la nube debe permanecer fija.<br>
-                Por defecto, este caché tiene un tiempo de vida de <code>3</code> horas.
-                Poner <code>0</code> para deshabilitar el cacheo.
-                Valor recomendado: depende de la cantidad de entradas publicadas y su frecuencia.
-                Para sitios constantemente actualizados, 3-6 horas sería suficiente.
-                Para sitios con menor frecuencia de actualización, 24 horas o más.
-            ]]></description>
-            <type>number</type>
-        </specs>
-        <specs key="tags_cloud_widget_cache_version">
-            <title>Versión del caché de nube de etiquetas</title>
-            <description><![CDATA[
-                Sumar <code>1</code> para forzar la recarga.
-            ]]></description>
-            <type>number</type>
-        </specs>
-        <specs key="tags_cloud_exceptions">
-            <title>Excepciones para la nube de etiquetas</title>
-            <description><![CDATA[
-                Lista separada por espacios de tags (sin el símbolo <code>#</code>) a excluír en la nube de etiquetas.
-            ]]></description>
-            <type>text</type>
-        </specs>
-        
-    </settings_data>
 </language>
