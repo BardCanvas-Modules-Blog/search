@@ -1,6 +1,11 @@
 
 # Search Module Change Log
 
+## [1.4.0] - 2017-05-13
+
+- Updated widgets to support new widgets manager version.
+  **WARNING:** After updating to this version, all existing widgets must be reviewed.
+
 ## [1.3.5] - 2017-04-20
 
 - Added changelog.
