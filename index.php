@@ -32,7 +32,7 @@ if( ! empty($config->globals["search_terms"]) )
     $cookie_key = "{$config->website_key}_s_{$hash}";
     if( empty($_COOKIE[$cookie_key]) )
     {
-        if( $account->level < config::MODERATOR_USER_LEVEL )
+        if( $account->level < config::MODERATOR_USER_LEVEL && $terms != "%" )
             $history_repository->save(new search_history_record(array(
                 "terms" => $terms
             )));
