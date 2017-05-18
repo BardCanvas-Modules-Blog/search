@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.1] - 2017-05-17
+
+- Added terms loggging exclussion.
+
 ## [1.4.0] - 2017-05-13
 
 - Updated widgets to support new widgets manager version.
