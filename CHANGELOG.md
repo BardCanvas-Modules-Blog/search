@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.2] - 2017-11-18
+
+- Added missing params on search form.
+
 ## [1.4.1] - 2017-05-17
 
 - Added terms loggging exclussion.
