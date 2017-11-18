@@ -130,6 +130,14 @@ if( $posts_data->count == 0 )
 
 <?
 if($account->_is_admin && $_GET["show_query"] == "true") echo "<pre>{$repository->get_last_query()}</pre>";
-$pagination_url_prefix = "$config->full_root_url/?s=" . urlencode($config->globals["search_terms"]);
+$pagination_url_prefix = sprintf(
+    "%s/?s=%s&cat=%s&user=%s&pubdate=%s",
+    $config->full_root_url,
+    urlencode($config->globals["search_terms"]),
+    urlencode($config->globals["category_id"]),
+    urlencode($config->globals["user_name"]),
+    urlencode($config->globals["pub_date"])
+    
+);
 $template->set("pagination_url_prefix", $pagination_url_prefix);
 include "{$template->abspath}/segments/post_index_renderer.inc";
