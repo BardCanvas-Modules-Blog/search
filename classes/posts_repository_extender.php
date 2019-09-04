@@ -23,39 +23,59 @@ class posts_repository_extender extends posts_repository
         if( empty($search) ) throw new \Exception("Something to search must be specified.");
         
         $where = array();
-        if( strtolower(substr($search, 0, 3)) == "ip:" && $account->level >= config::MODERATOR_USER_LEVEL )
+        
+        if( substr($search, 0, 1) == "#" )
         {
-            $search = str_replace("ip:", "", $search);
-            $where[] = "creation_ip like '$search'";
-        }
-        elseif( strtolower(substr($search, 0, 5)) == "city:" && $account->level >= config::MODERATOR_USER_LEVEL )
-        {
-            $search = str_replace("city:", "", $search);
-            $where[] = "creation_location like '$search%'";
-        }
-        elseif( strtolower(substr($search, 0, 8)) == "country:" && $account->level >= config::MODERATOR_USER_LEVEL )
-        {
-            $search = str_replace("country:", "", $search);
-            $where[] = "creation_location like '%$search%'";
-        }
-        elseif( strtolower(substr($search, 0, 4)) == "isp:" && $account->level >= config::MODERATOR_USER_LEVEL )
-        {
-            $search = str_replace("isp:", "", $search);
-            $where[] = "creation_location like '%$search%'";
+            $tag = str_replace("#", "", $search);
+            $where[] = "(
+                    title LIKE '%{$search}%'
+                    or
+                    content LIKE '%{$search}%'
+                    or
+                    id_post in (
+                        select id_post from post_tags where tag = '$tag'
+                    )
+                )";
         }
         else
         {
-            $where[] = "(
-                title LIKE '%{$search}%'
-                or
-                content LIKE '%{$search}%'
-                or
-                id_author in (
-                    select id_account from account
-                    where account.display_name like '%{$search}%'
-                    or account.user_name like '%{$search}%'
-                )
-            )";
+            if( $account->level >= config::MODERATOR_USER_LEVEL )
+            {
+                if( strtolower(substr($search, 0, 3)) == "ip:" )
+                {
+                    $search = str_replace("ip:", "", $search);
+                    $where[] = "creation_ip like '$search'";
+                }
+                elseif( strtolower(substr($search, 0, 5)) == "city:" )
+                {
+                    $search = str_replace("city:", "", $search);
+                    $where[] = "creation_location like '$search%'";
+                }
+                elseif( strtolower(substr($search, 0, 8)) == "country:" )
+                {
+                    $search = str_replace("country:", "", $search);
+                    $where[] = "creation_location like '%$search%'";
+                }
+                elseif( strtolower(substr($search, 0, 4)) == "isp:" )
+                {
+                    $search = str_replace("isp:", "", $search);
+                    $where[] = "creation_location like '%$search%'";
+                }
+            }
+            else
+            {
+                $where[] = "(
+                    title LIKE '%{$search}%'
+                    or
+                    content LIKE '%{$search}%'
+                    or
+                    id_author in (
+                        select id_account from account
+                        where account.display_name like '%{$search}%'
+                        or account.user_name like '%{$search}%'
+                    )
+                )";
+            }
         }
         
         if( ! empty($cat_id) ) $where[] = "main_category = '$cat_id'";
