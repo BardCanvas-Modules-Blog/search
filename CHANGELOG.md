@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.3] - 2019-09-04
+
+- Added missing logic to search tags in the post tags table (only looked upon the title and contents).
+
 ## [1.4.2] - 2017-11-18
 
 - Added missing params on search form.
