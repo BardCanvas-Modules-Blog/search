@@ -1,6 +1,11 @@
 
 # Search Module Change Log
 
+## [1.4.4] - 2020-02-05
+
+- Tuned admin search cases.
+- Added SQL injection check.
+
 ## [1.4.3] - 2019-09-04
 
 - Added missing logic to search tags in the post tags table (only looked upon the title and contents).
