@@ -61,6 +61,20 @@ class posts_repository_extender extends posts_repository
                     $search = str_replace("isp:", "", $search);
                     $where[] = "creation_location like '%$search%'";
                 }
+                else
+                {
+                    $where[] = "(
+                        title LIKE '%{$search}%'
+                        or
+                        content LIKE '%{$search}%'
+                        or
+                        id_author in (
+                            select id_account from account
+                            where account.display_name like '%{$search}%'
+                            or account.user_name like '%{$search}%'
+                        )
+                    )";
+                }
             }
             else
             {
