@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.5] - 2021-12-13
+
+- Tuned SQL injection checks.
+
 ## [1.4.4] - 2020-02-05
 
 - Tuned admin search cases.
