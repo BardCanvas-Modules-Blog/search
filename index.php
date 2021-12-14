@@ -18,14 +18,8 @@ use hng2_modules\search\search_history_repository;
 include "../config.php";
 include "../includes/bootstrap.inc";
 
-try
-{
-    check_sql_injection($_REQUEST["s"]);
-}
-catch(\Exception $e)
-{
-    throw_fake_501();
-}
+try { check_sql_injection($_REQUEST["s"]); }
+catch(\Exception $e) { throw_fake_501(); }
 
 $config->globals["search_terms"] = str_replace("\"", "", trim(stripslashes($_REQUEST["s"])));
 $config->globals["category_id"]  = trim(stripslashes($_REQUEST["cat"]));
