@@ -30,7 +30,7 @@ foreach($config->globals["search_by_tag_counts"] as $key => $count)
 }
 
 $limit  = 30;
-$offset = empty($_GET["offset"]) ? 0 : $_GET["offset"];
+$offset = (int) $_GET["offset"];
 
 $browser    = new record_browser("search_by_tag_results");
 $pagination = $browser->build_pagination($highest_count, $limit, $offset);
