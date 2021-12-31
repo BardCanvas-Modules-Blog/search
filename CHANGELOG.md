@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.6] - 2021-12-31
+
+- Input sanitization.
+
 ## [1.4.5] - 2021-12-13
 
 - Tuned SQL injection checks.
