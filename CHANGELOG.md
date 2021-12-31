@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.7] - 2021-12-31
+
+- Input sanitization on the "search by tag" script.
+
 ## [1.4.6] - 2021-12-31
 
 - Input sanitization.
