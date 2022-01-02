@@ -1,6 +1,10 @@
 
 # Search Module Change Log
 
+## [1.4.8] - 2022-01-01
+
+- Input sanitization on the search history repository.
+
 ## [1.4.7] - 2021-12-31
 
 - Input sanitization on the "search by tag" script.
