@@ -22,6 +22,8 @@ class search_history_repository extends abstract_repository
         
         $record->last_hit = date("Y-m-d H:i:s");
         
+        $record->terms = addslashes($record->terms);
+        
         return $database->exec("
             insert into search_history (
               terms, hits, last_hit
